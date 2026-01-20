@@ -1,0 +1,96 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsmljcu6isa6j"]
+
+[ext_resource type="Script" uid="uid://bn3sw2echkuw3" path="res://scenes/bills.gd" id="1_qin6x"]
+[ext_resource type="Texture2D" uid="uid://cgcjqkm17rl35" path="res://graphics/bills/bills_tileset.png" id="2_pcepa"]
+[ext_resource type="AudioStream" uid="uid://c0swwrfq8d3ax" path="res://audio/card-shuffle.ogg" id="3_pcepa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejs7r"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(0, 23, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdnxt"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(28, 23, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nfpf"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(0, 46, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68n4t"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(28, 46, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbjf0"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(0, 0, 28, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1fea"]
+atlas = ExtResource("2_pcepa")
+region = Rect2(28, 0, 28, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejs7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejs7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdnxt")
+}],
+"loop": true,
+"name": &"electric",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nfpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68n4t")
+}],
+"loop": true,
+"name": &"gas",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbjf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1fea")
+}],
+"loop": true,
+"name": &"water",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdnxt"]
+size = Vector2(26, 14)
+
+[node name="Water Bill" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_qin6x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_ejs7r")
+animation = &"water"
+autoplay = "water"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_tdnxt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3, 0)
+rect = Rect2(-15, -9, 30, 18)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pcepa")
+volume_db = -5.0
+autoplay = true
+max_distance = 110.0
+parameters/looping = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

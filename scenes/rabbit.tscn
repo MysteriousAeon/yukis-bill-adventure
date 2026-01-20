@@ -1,0 +1,148 @@
+[gd_scene load_steps=18 format=3 uid="uid://c427hjdft6efs"]
+
+[ext_resource type="Texture2D" uid="uid://bhclsxqpuol6j" path="res://graphics/player/rabbit.png" id="1_0rrc3"]
+[ext_resource type="Script" uid="uid://lcu54uua42p7" path="res://scenes/rabbit.gd" id="1_dxh4p"]
+[ext_resource type="Texture2D" uid="uid://j7g7dn0m4grl" path="res://graphics/player/rabbit_tileset.png" id="3_haj5u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haj5u"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(0, 144, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gij47"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(72, 144, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isyl8"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(144, 144, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f1j7"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(216, 144, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukfwh"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(0, 216, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybw8e"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(72, 216, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcyra"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(144, 216, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k4km"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(216, 216, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdthu"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jct7b"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rwyk"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3ihv"]
+atlas = ExtResource("3_haj5u")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gij47"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haj5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gij47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isyl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gij47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f1j7")
+}],
+"loop": true,
+"name": &"down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukfwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybw8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcyra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k4km")
+}],
+"loop": true,
+"name": &"side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdthu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jct7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rwyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jct7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3ihv")
+}],
+"loop": true,
+"name": &"up",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxh4p"]
+size = Vector2(9, 7)
+
+[node name="Rabbit" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_dxh4p")
+
+[node name="RabbitIdle" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_0rrc3")
+
+[node name="RabbitAnimated" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_gij47")
+animation = &"up"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+process_callback = 0
+limit_left = -192
+limit_top = -320
+limit_right = 192
+limit_bottom = 320
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_dxh4p")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+collision_mask = 9

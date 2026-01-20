@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://4d8dda0lp6ml"]
+
+[ext_resource type="Script" uid="uid://chvqc4yjgod77" path="res://scenes/global.gd" id="1_4pk28"]
+[ext_resource type="AudioStream" uid="uid://3hf5gxjttxra" path="res://audio/021914bgm2(happytune).mp3" id="2_nmxvb"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_4pk28")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nmxvb")
+parameters/looping = true
